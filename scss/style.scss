@@ -1,0 +1,145 @@
+@import './reset';
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+$primary-color: #333;
+$secondary-color: #3bf5cd;
+$shadow: lighten($secondary-color, 30) 0px 0px 10px 1px;
+$ext-shadow: lighten($secondary-color, 5) 0px 0px 15px 1px;
+$desk-hight: 500px;
+$desk-width: 500px;
+$mob-hight: 250px;
+$mob-width: 250px;
+$desk-font-size: 2rem;
+$mob-font-size: 1.5rem;
+
+// Clock number placement
+$num-rotation: 0deg;
+@for $i from 0 through 12 {
+  #num#{$i} {
+    transform: rotate($num-rotation);
+    $num-rotation: $num-rotation + 30;
+  }
+}
+
+// showing numbers upward
+$n-rotation: 0deg;
+@for $i from 0 through 12 {
+  #n#{$i} {
+    transform: rotate($n-rotation);
+    $n-rotation: $n-rotation - 30;
+    padding: 0.2rem;
+  }
+}
+
+body {
+  height: 100vh;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $primary-color;
+  overflow: hidden;
+  transform: translateY(-100%);
+  transition: all 1s ease-in-out;
+  .clock-container {
+    box-shadow: $shadow;
+    position: relative;
+    height: $desk-hight;
+    width: $desk-width;
+    background: lighten($primary-color, 10);
+    border-radius: 50%;
+    border: black solid 5px;
+
+    .numbers {
+      color: #fff;
+      padding: 0.5rem;
+      font-size: $desk-font-size;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      text-shadow: #3bf5cd 1px 1px 5px;
+    }
+
+    .pin {
+      z-index: 10;
+      position: absolute;
+      right: 50%;
+      bottom: 50%;
+      margin: -7.5px -7.5px;
+      border-radius: 50%;
+      height: 15px;
+      width: 15px;
+      background: $primary-color;
+    }
+    .hand {
+      position: absolute;
+      border-radius: 50%;
+      right: 50%;
+      bottom: 50%;
+      transform-origin: bottom;
+      background: darken($secondary-color, 15);
+      box-shadow: $secondary-color 0 0 20px 1px;
+    }
+    .sec-hand {
+      box-shadow: none;
+
+      transform-origin: 70% 70%;
+      right: 50%;
+      bottom: 33%;
+      height: 280px;
+      width: 2px;
+      background: red;
+      z-index: 5;
+      margin-right: -1px;
+    }
+
+    .min-hand {
+      transform: rotate(-25deg);
+      height: 200px;
+      width: 6px;
+      margin-right: -3px;
+      z-index: 4;
+    }
+    .hour-hand {
+      transform: rotate(25deg);
+      height: 160px;
+      width: 10px;
+      margin-right: -5px;
+      z-index: 3;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .clock-container {
+      height: $mob-hight;
+      width: $mob-width;
+      .numbers {
+        font-size: $mob-font-size;
+      }
+      .pin {
+        margin: -5px -5px;
+        height: 10px;
+        width: 10px;
+        background: $primary-color;
+      }
+      .sec-hand {
+        transform-origin: 30% 30%;
+        right: 50%;
+        bottom: 5.9%;
+        height: 150px;
+      }
+      .min-hand {
+        height: 100px;
+        width: 5px;
+        margin-right: -2.5px;
+      }
+      .hour-hand {
+        height: 65px;
+        width: 8px;
+        margin-right: -4px;
+      }
+    }
+  }
+}
